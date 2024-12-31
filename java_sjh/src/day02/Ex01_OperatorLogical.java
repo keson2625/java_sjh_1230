@@ -30,7 +30,7 @@ public class Ex01_OperatorLogical {
 		//정수가 0이상인지 판별하는 예제(||연산자 사용)
 		int num = 10;
 		//num이 0보다 크거나 num이  과 같다
-		boolean ispositive = num >= 10; //num >= 10 <=이렇게 사용도 가능
+		boolean ispositive = num > 0 || num == 0; //num >= 10 <=이렇게 사용도 가능
 		System.out.println(num + "는 0이상인가? " + ispositive);
 	}
 }
