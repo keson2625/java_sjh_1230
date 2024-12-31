@@ -10,8 +10,8 @@ public class Ex18_Forcount {
 		 * 반복문 종료 후 : 없음
 		 */
 		
-		
-		for(int i = 1, a = 1; i<=5; ++i) {
+		int i = 1, a = 1;
+		for(i = 1; i<=5; ++i) {
 			System.out.println(a++);
 		}
 		/*for(int i =1; i<=5; ++i) {
