@@ -24,7 +24,8 @@ public class Ex08_IFGrade {
 		 * F라고 출력하고
 		 * 아니면 잘못된 점수라고 출력
 		 * */
-		int score = 115;
+		
+		int score = 90;
 		if(score >= 90 && score <= 100) {
 			System.out.println(score + "는 A");
 		}
@@ -65,5 +66,4 @@ public class Ex08_IFGrade {
 			System.out.println(score + "는 F");
 		}
 	}
-
 }
