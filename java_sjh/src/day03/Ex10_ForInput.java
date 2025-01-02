@@ -14,7 +14,7 @@ public class Ex10_ForInput {
 		Scanner scan = new Scanner(System.in);
 	
 		for(; ;) {
-			System.out.println("문자를 입력하세요 : ");
+			System.out.print("문자를 입력하세요 : ");
 			char ch = scan.next().charAt(0);
 			if(ch == 'q') {
 				break;
