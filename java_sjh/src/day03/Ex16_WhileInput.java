@@ -2,7 +2,7 @@ package day03;
 
 import java.util.Scanner;
 
-public class EX16_WhileInput {
+public class Ex16_WhileInput {
 
 	public static void main(String[] args) {
 		/* 문장을 입력받아 문자가 q일 때 종료하는 코드를 작성 
