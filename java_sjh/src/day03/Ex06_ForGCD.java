@@ -36,8 +36,6 @@ public class Ex06_ForGCD {
 		}
 		System.out.println(num1 + "과 " +num2 +"의 최대 공약수 : " + gcd);
 		
-		
-		
 		for(int i = 1 ; i<= num1; i++) {
 			if(num1 % i == 0) {
 				if(num2 % i == 0) {
