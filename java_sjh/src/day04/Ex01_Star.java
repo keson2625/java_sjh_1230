@@ -22,7 +22,7 @@ public class Ex01_Star {
 			for(star=1;star<=i;star++){
 				System.out.print("*");
 			}		
-	}
+	}<= 이렇게도 가능
 */
 	
 			for(int i = 1; i<=5; i++) {
