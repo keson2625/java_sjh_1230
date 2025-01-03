@@ -18,9 +18,9 @@ public class Ex21_NestingSter {
 	for(int i=1; i<=5; i++){		
 		for(int j=1; j<=5; j++) {
 			System.out.print("*");
-		}
-		System.out.println();
-		}
+			}
+			System.out.println();
+			}
  	 
 	  /* *		i=1 *1
 		 **		i=2 *2
@@ -30,17 +30,17 @@ public class Ex21_NestingSter {
 	   */
 
 	for(int j=1; j<=5; j++) {
-			System.out.println();		
+			System.out.println();
 		for(int star=1; star <= j; star++) {
 			System.out.print("*");
+		}
 		for(int space=1; space <= j; space++) {
 			System.out.print("");
-			}
-		}	
+		}
 	}
 }
 }
-	
+
 /*
 	int num = 5;
 	for(int i = 1; i<= num; i++) {
