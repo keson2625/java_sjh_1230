@@ -17,7 +17,7 @@ public class Ex06_Singleton {
 }
 
 class Singleton{
-	//싱글톤 클래스는 객체를 생성해서 클래스 변수에 연결. 생성자는 이때만 사용
+	//싱글톤 클래스는 객체를 생성해서 클래스 변수에 연결. 생성자는 이때만 사용.
 	private static Singleton s = new Singleton();
 	
 	private int num = 10;
