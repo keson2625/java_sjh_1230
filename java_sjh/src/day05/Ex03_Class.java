@@ -53,7 +53,7 @@ public class Ex03_Class {
 			System.out.println("이름 : " + name + " - " + count + "회");
 		}
 		
-		//생성자
+		//생성자.
 		public Record(String name, int count) {
 			this.name = name;
 			this.count = count;
