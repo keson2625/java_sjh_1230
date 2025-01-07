@@ -134,7 +134,7 @@ public class Ex02_Day04_Homework2 {
 		}
 		System.out.print("메뉴로 가려면 엔터를 입력하세요.");
 		scan.nextLine();//메뉴와 함께 입력한 엔터 처리용
-		scan.nextLine();//메뉴로 돌아가기 위한 엔터 처리
+		scan.nextLine();//메뉴로 돌아가기 위한 엔터 처리합니다
 		
 	}
 

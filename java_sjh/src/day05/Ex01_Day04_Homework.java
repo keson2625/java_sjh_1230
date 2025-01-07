@@ -105,7 +105,7 @@ public class Ex01_Day04_Homework {
 				System.out.println("올바른 메뉴가 아닙니다.");
 			}
 		
-			//종료를 선택하기 전까지 반복
+			//종료를 선택하기 전까지 반복함
 		}while(menu != '3');//조건식은 참 또는 거짓이 되는 식 
 		
 	}
