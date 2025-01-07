@@ -7,7 +7,7 @@ public class Ex08_Array {
 public static void main(String[] args) {
 		
 		//학생 3명의 국어 성적을 관리하기 위해서 배열을 선언하고, 
-		//콘솔을 통해 성적을 입력받고, 입력받은 성적을 출력하는 코드
+		//콘솔을 통해 성적을 입력받고, 입력받은 성적을 출력하는 코드.
 		int studentCount = 3;
 		int [] kors = new int[studentCount];
 		
