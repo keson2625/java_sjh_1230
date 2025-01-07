@@ -43,7 +43,7 @@ class StaticTest{
 		printSa();
 	}
 	public static void staticTest() {
-		//printA();//객체 메소드는 정적 메소드에서 사용할 수 없음.
+		//printA();//객체 메소드는 정적 메소드에서 사용할 수 없음
 		StaticTest st = new StaticTest();
 		st.printA();//객체 메소드를 사용하기 위해 객체를 생성한 후 사용하면 가능
 		printSa();

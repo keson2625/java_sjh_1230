@@ -42,7 +42,7 @@ class KiaCar{
 		System.out.println(company + " : " + carName);
 	}
 	
-	//생성자
+	//생성자.
 	public KiaCar(String carName) {
 		company = "기아";
 		this.carName = carName;
