@@ -93,7 +93,7 @@ public class Ex09_ProgramScore {
 		System.out.print("성적 : ");
 		int score = scan.nextInt();
 		
-		//학생 정보를 이용해서 Student의 객체를 생성
+		//학생 정보를 이용해서 Student의 객체를 생성.
 		Student student = new Student(name, score);
 		//배열에 추가 
 		std[count] = student;
