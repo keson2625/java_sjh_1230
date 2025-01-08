@@ -66,7 +66,7 @@ public class Ex04_StudentScore1 {
 		//메뉴를 4를 입력하기 전까지 반복해서 출력하는 코드를 작성하세요.
 		int menu, count = 0;
 		Scanner scan = new Scanner(System.in);
-		//학생 성적을 관리하기 위한 10개짜리 배열을 선언하고 생성하세요.
+		//학생 성적을 관리하기 위한  10개짜리 배열을 선언하고 생성하세요.
 		Student [] list = new Student[10];
 		//0번지에 1학년 1반 1번 홍길동 국어 100을 가지는 객체를 생성해서 저장하세요.
 		list[count] = new Student(1, 1, 1, "홍길동", "국어", 100);
