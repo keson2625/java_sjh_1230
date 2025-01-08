@@ -14,7 +14,7 @@ public class Ex04_Class {
 		do {
 			printMenu();
 			menu = scan.next().charAt(0);
-			count = runMenu(menu, std, count); // count 전달
+			count = runMenu(menu, std, count);
 			std = expend(std, count); // 학생 배열 확장
 		} while (menu != '5');
 	}
@@ -139,7 +139,8 @@ public class Ex04_Class {
 		String name, subject;
 		int score;
 
-		public Student(int grade, int classNum, int num, String name, String subject, int score) {
+		public Student(int 
+				grade, int classNum, int num, String name, String subject, int score) {
 			this.grade = grade;
 			this.classNum = classNum;
 			this.num = num;
