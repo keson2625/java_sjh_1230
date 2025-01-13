@@ -29,5 +29,5 @@ public class Student {
 	        int score = scan.nextInt();
 	        return null;
 	 }
-}
+}c
 //public Subject[] list;

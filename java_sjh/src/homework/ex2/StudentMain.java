@@ -65,8 +65,7 @@ public class StudentMain {
             }
         } while (menu != 4);
     }
-	
-		
+		d
    }
 
 
