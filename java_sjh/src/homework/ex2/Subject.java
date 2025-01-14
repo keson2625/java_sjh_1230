@@ -23,7 +23,6 @@ public class Subject {
 				&& smester == other.smester;
 	}
 	
-	s
 }
 	
 	

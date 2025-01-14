@@ -39,34 +39,131 @@ import java.util.Scanner;
  * 
  * 
  */
-public class StudentMain {
+public  class StudentMain {
+
 	
-	Scanner scan = new Scanner(System.in);
+	static Scanner scan = new Scanner(System.in);
 	
+
 	public static void main(String[] args) {
 		
 		int menu;
         do {
-            System.out.print("""
-                    메뉴
-                    1. 학생 성적 추가
-                    2. 학생 성적 조회
-                    3. 학생 성적 수정
-                    4. 프로그램 종료
-                    메뉴 선택: """);
+            print();
             menu = scan.nextInt();
+            runMenu(menu);
+            
 
-            switch (menu) {
-                case 1 -> addStudent(list, scan); 
-                case 2 -> viewStudents(list); 
-                case 3 -> modifyStudent(list, scan); 
-                case 4 -> System.out.println("프로그램을 종료합니다.");
-                default -> System.out.println("올바른 메뉴를 선택하세요.");
-            }
-        } while (menu != 4);
-    }
-		d
-   }
+        }while(menu != 13);
+	}
+	
+
+	public static void print() {
+		System.out.print(
+                "-------------------\r\n"+
+                "1. 학생 등록\r\n"+
+                "2. 학생 수정\r\n"+
+                "3. 학생 삭제\r\n"+
+                "4. 과목 등록\r\n"+
+                "5. 과목 수정\r\n"+
+                "6. 과목 삭제\r\n"+
+                "7. 성적 등록\r\n"+
+                "8. 성적 수정\r\n"+
+                "9. 성적 삭제\r\n"+
+                "10. 학생 조회\r\n"+
+                "11. 과목 조회\r\n"+
+                "12. 성적 조회\r\n"+
+                "13. 프로그램 종료\r\n"+
+                "-------------------\r\n"+
+                "메뉴 선택: ");
+	}
+	
+	private static void runMenu(int menu) {
+		switch (menu) {
+     	case 1 -> addStudent(); 
+     	case 2 -> modifyStudent(); 
+     	case 3 -> deleteStudent(); 
+     	case 4 -> addSubject(); 
+		case 5 -> modifySubject(); 
+		case 6 -> dlelteSubject(); 
+		case 7 -> addScore(); 
+		case 8 -> modifyScore(); 
+		case 9 -> deleteScore(); 
+		case 10 -> viewStudent(); 
+		case 11 -> viewSubject(); 
+		case 12 -> viewScore(); 
+		case 13 -> System.out.println("프로그램을 종료합니다.");
+		default -> System.out.println("올바른 메뉴를 선택하세요.");
+	 
+	 }
+	 
+ }
+
+private static Object addStudent() {
+	// TODO Auto-generated method stub
+	return null;
+}
+
+private static Object modifyStudent() {
+	// TODO Auto-generated method stub
+	return null;
+}
+
+private static Object deleteStudent() {
+	// TODO Auto-generated method stub
+	return null;
+}
+
+private static Object addSubject() {
+	// TODO Auto-generated method stub
+	return null;
+}
+
+private static Object modifySubject() {
+	// TODO Auto-generated method stub
+	return null;
+}
+
+private static Object dlelteSubject() {
+	// TODO Auto-generated method stub
+	return null;
+}
+
+private static Object addScore() {
+	// TODO Auto-generated method stub
+	return null;
+}
+
+private static Object modifyScore() {
+	// TODO Auto-generated method stub
+	return null;
+}
+
+private static Object deleteScore() {
+	// TODO Auto-generated method stub
+	return null;
+}
+
+private static Object viewStudent() {
+	// TODO Auto-generated method stub
+	return null;
+}
+
+private static Object viewSubject() {
+	// TODO Auto-generated method stub
+	return null;
+}
+
+private static Object viewScore() {
+	// TODO Auto-generated method stub
+	return null;
+}
+		
+}
+
+
+		
+   
 
 
 
