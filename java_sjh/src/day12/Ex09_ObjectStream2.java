@@ -1,8 +1,15 @@
 package day12;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import day10.PhoneNumber;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -26,7 +33,7 @@ public class Ex09_ObjectStream2 {
 	
 	public static void main(String[] args) {
 		
-		String filName = "src/day12/Car.txt";
+		String fileName = "src/day12/Car.txt";
 		
 		int menu;
 		
@@ -53,8 +60,11 @@ public class Ex09_ObjectStream2 {
 
 		switch(menu) {
 		case 1 : addCar();
+			break;
 		case 2 : saearchCar();
+			break;
 		case 3 : System.out.println("프로그램을 종료합니다.");
+			break;
 		default: System.out.println("잘못 입력 하셨습니다.");
 		}
 	}
@@ -62,27 +72,40 @@ public class Ex09_ObjectStream2 {
 	private static void addCar() {
 		System.out.print("이름 : ");
         String name = scan.nextLine();
-        
         System.out.print("회사명 : ");
         String brand = scan.nextLine();
-	
-        list.print(s->s.getname()==name);
+        
+        Car car = new Car(name, brand);
+		list.add(car);
+        
 	}
 
 	private static void saearchCar() {
 		// TODO Auto-generated method stub
 		
 	}
-	private static void print() {
-		// TODO Auto-generated method stub
+	private static void print(String fileName) {
 		
+		try(FileWriter fw = new FileWriter(fileName)){
+			String str = "가나다123";
+			fw.write(str);
+			fw.flush();
+			System.out.println(str + "을 파일에 기록했습니다.");
+		} catch (IOException e) {
+			System.out.println("IO 예외 발생");
+			}
 	}
-}
 
+	
+}
 
 @Data
 @AllArgsConstructor
-class Car{
+
+class Car implements Serializable{
+	
+	
+	private static final long serialVersionUID = 1455289863100321662L;
 	
 	private String name;
 	private String brand;
@@ -90,5 +113,10 @@ class Car{
 	@Override
 	public String toString() {
 		return "(" + name + " , " + brand + ")";
+	}
+	
+	public void update(String newName, String newBrand) {
+		this.name = newName;
+		this.brand = newBrand;
 	}
 }
