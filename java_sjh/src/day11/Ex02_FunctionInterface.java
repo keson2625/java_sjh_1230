@@ -36,7 +36,7 @@ public class Ex02_FunctionInterface {
 			}
 		}
 	}
-	
+
 }
 
 @Data
