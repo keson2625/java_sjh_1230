@@ -9,7 +9,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import day10.PhoneNumber;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
