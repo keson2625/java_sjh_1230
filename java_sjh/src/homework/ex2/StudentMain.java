@@ -1,6 +1,5 @@
 package homework.ex2;
 
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /*	학생성적 관리 프로그램작성
@@ -41,16 +40,101 @@ import java.util.Scanner;
  * 
  */
 
-public  class StudentMain{
+public  class StudentMain {
 
 	
 	static Scanner scan = new Scanner(System.in);
 	
+
 	public static void main(String[] args) {
 		
-		StudentManager stm = new StudentManager();
-		stm.studentManager();
+		int menu;
+        do {
+            print();
+            menu = scan.nextInt();
+            runMenu(menu);
+            
+
+        }while(menu != 4);
 	}
+	
+
+	public static void print() {
+		System.out.print(
+                "-------------------\r\n"+
+                "1. 학생\r\n"+
+                "2. 과목\r\n"+
+                "3. 성적\r\n"+
+                "4. 프로그램 종료\r\n"+
+                "-------------------\r\n"+
+                "메뉴 선택: ");
+	}
+	/*
+	"-------------------\r\n"+
+    "1. 등록\r\n"+
+    "2. 수정\r\n"+
+    "3. 삭제\r\n"+
+    "4. 과목 등록\r\n"+
+    "5. 과목 수정\r\n"+
+    "6. 과목 삭제\r\n"+
+    "7. 성적 등록\r\n"+
+    "8. 성적 수정\r\n"+
+    "9. 성적 삭제\r\n"+
+    "10. 학생 조회\r\n"+
+    "11. 과목 조회\r\n"+
+    "12. 성적 조회\r\n"+
+    "13. 프로그램 종료\r\n"+
+    "-------------------\r\n"+
+    "메뉴 선택: ");
+    
+    case 1 -> addStudent(); addSubject(); addScore(); 
+     	case 2 -> updateStudent(); modifySubject(); modifyScore(); 
+     	case 3 -> deleteStudent(); dlelteSubject(); deleteScore(); 
+     	case 4 : searchStudent(); viewSubject(); viewScore(); 
+		
+    */
+	
+	private static void runMenu(int menu) {
+		switch (menu) {
+     	case 1 : student();
+     	case 2 : subject();
+     	case 3 : score();
+		case 4 : System.out.println("프로그램을 종료합니다.");
+		default : System.out.println("올바른 메뉴를 선택하세요.");
+	 }
+	 
+ }
+
+
+	
+
+
+
+	private static void student(int menu) {
+		
+            print();
+            menu = scan.nextInt();
+            studentMenu(menu);
+		
+	}
+
+
+	private static void subject() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	private static void score() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+
+
+		
 }
 
 

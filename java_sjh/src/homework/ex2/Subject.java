@@ -1,22 +1,16 @@
 package homework.ex2;
 
-import lombok.Data;
+import java.util.Objects;
 
-
-@Data
 public class Subject {
 
-	private int grade;
-	private int semester;
-	private String name;
+	public int grade;
+	public int smester;
+	public String name;
+	public int score;
 	
-public Subject(int grade, int semester, String name) {
-
-		this.grade = grade;
-		this.semester = semester;
-		this.name = name;
-	}
-
 	
-
 }
+	
+	
+
