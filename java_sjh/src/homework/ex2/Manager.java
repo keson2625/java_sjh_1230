@@ -16,7 +16,7 @@ import lombok.AllArgsConstructor;
 	static Scanner scan = new Scanner(System.in);
 	ArrayList<StudentManager> list = new ArrayList<StudentManager>();
 	
-	protected void studentManager() {
+	public void Manager(){
 		
 		int menu=0;//예외처리 떄문에 초기화 해야함
 		
@@ -69,10 +69,30 @@ import lombok.AllArgsConstructor;
 }
 
 	private static void student(int menu) {
+		StudentManager stm = new StudentManager();
+		stm.studentMenu(menu);
 		
 		printMenu();
 		menu = scan.nextInt();
-		studentMenu(menu);
+		student(menu);
+	}
+	
+	private static void subject(int menu) {
+		SubjectManager sjm = new SubjectManager();
+		sjm.subjectMenu(menu);
+		
+		printMenu();
+		menu = scan.nextInt();
+		subject(menu);
+	}
+	
+	private static void score(int menu) {
+		ScoreManager scm = new ScoreManager();
+		scm.scoreMenu(menu);
+		
+		printMenu();
+		menu = scan.nextInt();
+		score(menu);
 	}
 	
 	private static void printMenu() {
@@ -84,12 +104,5 @@ import lombok.AllArgsConstructor;
 	            "4. 조회\r\n"+
 	            "-------------------\r\n"+
 	            "메뉴 선택: ");
-	}
-	
-	
-	//학생
-	protected static void studentMenu(int menu){
-		
-		
 	}
 }

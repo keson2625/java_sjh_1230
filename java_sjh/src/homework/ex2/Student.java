@@ -1,29 +1,18 @@
 package homework.ex2;
 
-import java.util.ArrayList;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
+@AllArgsConstructor
 @Data
-
 public class Student {
+    private int grade;      // 학년
+    private int classNum;   // 반
+    private int num;        // 번호
+    private String name;    // 이름
 
-	public int grade, classNum, num;
-	public String name;
-	
-	public Student(int grade, int classNum, int num, String name, ArrayList<Student> list) {
-		
-		this.grade = grade;
-		this.classNum = classNum;
-		this.num = num;
-		this.name = name;
-		this.list = list;
-	}
-
-
-	//학생 개인의 성적을 담고 있는 배열
-	ArrayList<Student> list = new ArrayList<>();
-	
-	 
-	
+    @Override
+    public String toString() {
+        return grade + "학년 " + classNum + "반 " + num + "번 " + name;
+    }
 }
-//public Subject[] list;

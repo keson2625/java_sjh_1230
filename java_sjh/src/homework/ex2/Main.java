@@ -1,6 +1,5 @@
 package homework.ex2;
 
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /*	학생성적 관리 프로그램작성
@@ -41,15 +40,15 @@ import java.util.Scanner;
  * 
  */
 
-public  class StudentMain{
+public  class Main{
 
 	
 	static Scanner scan = new Scanner(System.in);
 	
 	public static void main(String[] args) {
 		
-		StudentManager stm = new StudentManager();
-		stm.studentManager();
+		Manager mg = new Manager();
+		mg.Manager();
 	}
 }
 
