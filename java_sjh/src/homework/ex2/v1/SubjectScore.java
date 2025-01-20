@@ -1,4 +1,4 @@
-package homework.ex2;
+package homework.ex2.v1;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -8,7 +8,9 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class Score {
+public class SubjectScore implements Serializable {
+
+	private static final long serialVersionUID = 5589823857268140091L;
 	
 	private Subject subject;
 	private int score;
@@ -21,7 +23,7 @@ public class Score {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Score other = (Score) obj;
+		SubjectScore other = (SubjectScore) obj;
 		return Objects.equals(subject, other.subject);
 	}
 
