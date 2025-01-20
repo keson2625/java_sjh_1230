@@ -75,17 +75,20 @@ public class Ex01_Post {
 		}
 	
 	private static void insertPost() {
-		try {
-			//객체를 생성
-			Post post = inputPost();
-			//객체를 생성했으면 리스트에 추가
-			list.add(post);
-			System.out.println("게시글을 등록했습니다.");
-		} catch (ParseException e) 
-			{
-			System.out.println("잘못 입력했습니다.");
-			} 
+		Post po = inputPost();
+		
+		if(e.po) {
+			System.out.println("이미 등록된 학생입니다.");
+			return;
 		}
+		studentList.add(po);
+		System.out.println("학생을 등록했습니다.");
+	} catch (Exception e) {
+		System.out.println("잘못 입력했습니다.");
+	} 
+
+
+	
 
 	private static Post inputPost() throws ParseException {
 		
@@ -99,6 +102,8 @@ public class Ex01_Post {
 		String writer = scan.nextLine();
 		
 		return new Post(titie, content, writer);
+		
+		
 	}
 		
 	private static void updatePost() {
