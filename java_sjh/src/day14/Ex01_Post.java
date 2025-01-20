@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 import lombok.Data;
 
@@ -80,10 +81,11 @@ public class Ex01_Post {
 			//객체를 생성했으면 리스트에 추가
 			list.add(post);
 			System.out.println("게시글을 등록했습니다.");
-		} catch (ParseException e) {
+		} catch (ParseException e) 
+			{
 			System.out.println("잘못 입력했습니다.");
-		} 
-	}
+			} 
+		}
 
 	private static Post inputPost() throws ParseException {
 		
@@ -108,8 +110,7 @@ public class Ex01_Post {
 		
 	}
 	private static void searchPost() {
-		// TODO Auto-generated method stub
-		
+	
 	}
 }	
 
@@ -154,7 +155,7 @@ class Post{
 		System.out.println("--------------------------");
 		
 	}
-
+	
 	private String getDateStr() {
 		//Date -> String
 		//yyyy--MM-dd HH:mm:ss
