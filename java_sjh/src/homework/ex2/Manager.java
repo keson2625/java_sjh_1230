@@ -245,7 +245,7 @@ import java.util.stream.Collectors;
 	        System.out.print("학기 : ");
 	        int semester = scan.nextInt();
 		        
-	        System.out.print("이름 : ");
+	        System.out.print("과목명 : ");
 	        String name = scan.next();
 			
 	        return new Subject(grade, semester, "");
