@@ -16,6 +16,8 @@ public class Post implements Serializable, Cloneable {
 	private String title, content, writer;
 	private Date date;
 	private int view;
+
+	private String write;
 	
 	@Override
 	public boolean equals(Object obj) {
@@ -46,7 +48,7 @@ public class Post implements Serializable, Cloneable {
 	}
 
 	public Post(Post p) {
-		this(p.title, p.content, p.writer);
+		this(p.title, p.content, p.write);
 	}
 
 	public void print() {
