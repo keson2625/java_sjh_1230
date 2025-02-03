@@ -1,13 +1,17 @@
 package day21;
 
+import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 
 import lombok.Data;
 
 @Data
-public class User {
-
+public class User implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
 	private String id;
+	private List<String> list2;
 	
 	public User(String id) {
 		this.id = id;

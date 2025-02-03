@@ -32,19 +32,16 @@ public class Ex02_Main {
 	 */
 	private static Scanner scan = new Scanner(System.in);
 	private static List<User> users = new ArrayList<User>();
+	private static String fileName = "src/day21/date.txt";
 
 	public static void main(String[] args) {
 		
-		String fileName = "src/day21/date.txt";
-		
-		users = (ArrayList<User>)load(fileName);
-
-		
+		load(fileName); 
+	
 		System.out.print("아이디 : ");
 		String id = scan.next();
 
 		User user = new User(id);
-		save(fileName, users);
 		
 		boolean user2 = id.equals("admin");// 관리자인지 여부 받기
 		if (user2) {
@@ -53,8 +50,10 @@ public class Ex02_Main {
 		} else {
 			System.out.println("회원가입이 완료됐습니다.");
 			userMenu(); // 일반 사용자 메뉴 실행
-		}
+		} 
+		save(fileName, id); 
 	}
+	
 	private static void save(String fileName, Object obj) {
 		try(FileOutputStream fos = new FileOutputStream(fileName);
 			ObjectOutputStream oos = new ObjectOutputStream(fos)){
