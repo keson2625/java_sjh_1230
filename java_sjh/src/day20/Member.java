@@ -1,32 +1,30 @@
 package day20;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 
 @Data
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class Member {
-
+	@NonNull
 	private String id;
+	@NonNull
 	private String pw;
-	private String authority;//사용자,관리자
+	@NonNull
+	private String authority;//사용자, 관리자3
+	private List<PurchaseItem> list = new ArrayList<PurchaseItem>();
 	
 	public Member(String id, String pw) {
-	
 		this.id = id;
 		this.pw = pw;
 		this.authority = "사용자";
 	}
-	
-	
-	@Override
-	public String toString() {
-		return "[" + "아이디 : " + id + ", " + "비밀번호 : " + pw +"]" ;
-	}
-
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -40,4 +38,11 @@ public class Member {
 		return Objects.equals(id, other.id);
 	}
 
+	public void addPurchaseItem(PurchaseItem pi) {
+		if(pi == null) {
+			return;
+		}
+		list.add(pi);
+	}
 }
+	
