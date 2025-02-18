@@ -6,7 +6,7 @@
     <title>Document</title>
     <style>
       /* CSS */
-      #todo {
+      .item > #todo {
         padding: 10px;
         font-size: 16px;
         border: 1px solid #ccc;
@@ -14,7 +14,7 @@
         margin-bottom: 10px;
         box-shadow: 5px 5px 10px 0px rgba(197, 194, 194, 0.87);
       }
-      #button {
+      button {
         padding: 10px 20px;
         font-size: 16px;
         background-color: #333;
@@ -26,13 +26,24 @@
     </style>
   </head>
   <body>
-    <input
-      href="http://naver.com"
-      type="text"
-      name="todo"
-      id="todo"
-      placeholder="입력하세요"
-    />
-    <button type="button" id="button" onclick="serch()">검색</button>
+    <div class="item">
+      <input type="text" name="todo" id="todo" placeholder="입력하세요" />
+    </div>
+    <div class="btn">
+      <button type="button" id="serch">검색</button>
+    </div>
+    <script>
+      const serchtBtn = document.querySelector("#serch");
+
+      serchtBtn.addEventListener("click", () => {
+        const searchText = document.querySelector("#todo").value;
+        window.open(
+          `https://search.naver.com/search.naver?where=nexearch&sm=top_hty&fbm=0&ie=utf8&query=${searchText}`
+        );
+        document.querySelector("#todo").value = "";
+      });
+      const textEl = document.querySelector("#todo");
+      textEl.onkeyenter = () => console.log("키 (엔터)");
+    </script>
   </body>
 </html>
