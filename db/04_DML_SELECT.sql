@@ -39,8 +39,8 @@ select distinct st_grade 학년 from student;
 select * from student where st_grade = 1;
 
 # 1학년 1반의 번호가 1 ~ 3인 학생들을 조회하는 쿼리 
-select * from student where st_num between 1 and 3 and st_grade =1;
-select * from student where st_num in(1,2,3) and st_grade = 1;
+select * from student where st_grade =1 and st_num between 1 and 3;
+select * from student where st_grade = 1 and st_num in(1,2,3);
 
 # 성이 홍씨인 학생들을 조회하는 쿼리 
 select * from student where st_name like "홍%";
