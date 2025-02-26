@@ -24,7 +24,8 @@ create table board(
     bo_view int not null default 0
 );
 # ABC123회원이 "인사"라는 제목으로 "안녕하세요"라는 내용을 작성했을 때 필요한 쿼리 
-insert into board(bo_title, bo_content, bo_writer) values("인사", "안녕하세요.", "ABC123");
+insert into community.board(bo_title, bo_content, bo_writer) values("인사", "안녕하세요.", "ABC123");
+insert into community.board(bo_title, bo_content, bo_writer) values("공지", "공지입니다.", "admin");
 
 # 1번 게시글을 클릭해서 게시글 내용을 조회할 때 필요한 쿼리 => 조회수 증가, 게시글 내용을 조회 
 # 조회수 증가
@@ -44,3 +45,10 @@ select * from board where bo_date between "2025-02-25" and "2025-02-25 23:59:59"
 
 # 제목이나 내용에 "안녕"을 포함하는 게시글을 조회하는 쿼리 
 select * from board where bo_title like "%안녕%" or bo_content like "%안녕%";
+
+# 최신글을 조회하는 쿼리 => 등록된 날짜가 최근 => 날짜 순으로 정렬
+select * from community.board order by bo_date desc;
+select * from community.board order by bo_num desc;
+
+# 인기글을 조회하는 쿼리 => 조회수가 높은 글이 인기글 => 조회순으로 정렬 
+select * from community.board order by bo_view desc;

@@ -9,6 +9,7 @@
 # create schema [if not exists] db명 
 # if not exists가 없으면 있는 db를 생성하려는 경우 쿼리에 에러가 발생
 # => 이후 쿼리를 실행할 수 없음
+drop database if exists student;
 create database if not exists student;
 
 # 데이터베이스 삭제
@@ -48,7 +49,8 @@ auto_increment
   - 데이터를 추가할 때 기본키에 값을 지정하지 않으면 자동으로 1 증가되어서 추가 됨 
 */
 use student;
-create table if not exists student(
+drop table if exists student.student;
+create table if not exists student.student(
 	st_key int primary key auto_increment, 
     st_grade int not null default 1,
     st_class int not null default 1,
@@ -88,7 +90,7 @@ alter table student drop constraint student_chk4;
 
 # 테이블 초기화 : auto_increment 값을 1로 초기화 및 데이터 제거 
 # truncate table 테이블명;
-
+/*
 insert into student.student(st_grade, st_class, st_num, st_name)
 values(1,1,1, "홍길동"), (1,1,2,"임꺽정"); 
 
@@ -100,4 +102,27 @@ values(1,1,3, "홍길동"), (1,1,4,"임꺽정");
 select * from student.student;
 
 truncate table student.student;
-#delete from student.student;
+# delete from student.student;
+*/
+
+drop table if exists studnet.subject;
+
+create table student.subject(
+	sj_num int primary key auto_increment,
+    sj_grade int not null default 1,
+    sj_semester enum("1", "2") not null default "1",
+    sj_name varchar(10) not null,
+    check(sj_grade in (1,2,3))
+);
+
+drop table if exists student.score;
+
+create table student.score(
+	sc_num int primary key auto_increment,
+    sc_st_key int not null,
+    sc_sj_num int not null,
+    sc_score int not null default 0,
+    check(sc_score between 0 and 100),
+    foreign key(sc_st_key) references student.student(st_key),
+    foreign key(sc_sj_num) references student.subject(sj_num)
+);
