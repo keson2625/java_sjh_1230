@@ -314,36 +314,88 @@ from score;
 select *, 
 nullif(sc_score, (select max(sc_score) from score)) as 결과 from score;
 
-# 내장함수 - 문자열 
-# char_length(문자열) : 문자열 개수 
-select char_length("안녕하세요") as char_length;
-# length(문자열) : 바이트 수 
-select length("안녕하세요") as length;
-# concat(문자열1, ...) : 문자열을 이어 붙임 
-select concat("안녕", "하", "세요?") as concat;
-# field(찾을문자열, 문자열1, ....) : 찾을 문자열의 위치를 찾아 반환 . 위치는 1부터 시작
-select field("안녕", "안녕하", "누구 안녕?", "안녕") as field;
-# instr(기준문자열, 부분문자열) : 기준 문자열에서 부분 문자열의 위치를 찾아 반환. 위치는 1부터 시작
-select instr("hello java", "java") as instr;
-# locate(부분문자열, 기준문자열) : 기준 문자열에서 부분 문자열의 위치를 찾아 반환 . 위치는 1부터 시작
-select locate("java", "hello java") as locate;
-# format(숫자, 소수점자리) : 숫자를 소수점이하 자리까지 표현. 1000단위마다 ,를 추가 
-select format(10000.123456, 0) as format;
-# bin(숫자), oct(숫자), hex(숫자) : 2,8,16진수로 변환 
-select bin(255) as bin,oct(255) as oct,hex(255) as hex ;
-# insert(기준문자열, 위치, 길이, 삽입할문자열) : 기준문자열의 위치부터 길이만큼 지우고 삽입할 문자열을 끼워서 반환
-select insert("hello java", 7, 4, "c++") as `insert`;
-# left(문자열, 길이), right(문자열, 길이) : 왼쪽/오른족에서 문자열의 길이만큼 반환 
-select left("test.txt", 4) as `left`, right("test.txt", 3) as `right`;
-# lower(문자열), upper(문자열) : 소문자로/대문자로 
-select lower("hello java") as `lower`, upper("HELLO JAVA") as `upper`;
-# lpad(문자열, 길이, 채울문자열)/rpad(문자열,길이,채울문자열) : 문자열을 길이만큼 늘리고 빈곳을 채울문자열로 채움 
-select lpad(1, 3, "0") as lpad, rpad(1, 3, "0") as rpad;
-# repeat(문자열, 횟수) : 문자열을 횟수만큼 반복 
-select repeat(1, 3) `repeat`;
-# replace(문자열, 문자열a, 문자열b) : 문자열에서 문자열a를 문자열b로 바꿈 
-select replace("hello java", "java", "c++") as `replace`;
-# reverse(문자열) : 문자열 순서를 역순으로 반환 
-select reverse("abcdef") as `reverse`;
-# substring(문자열, 시작위치, 길이) 문자열에서 시작위치부터 길이만큼 부분문자열을 반환 
-select substring("hello java", 7, 4) as substring;
+# group by 할 때 group by에 사용한 속성이 아닌 속성을 조회하는 경우 에러가 발생하는데 이를 해결하는 쿼리
+set global sql_mode = 'strict_trans_tables,no_engine_substitution';
+# 원상 복구하는 쿼리
+set global sql_mode = 'strict_trans_tables,no_engine_substitution,only_full_group_by';
+
+select * from student group by st_grade;#테스트
+
+# 각 학생별 평균을 조회하는 쿼리 
+select st_grade 학년, st_class 반, st_num 번호, st_name 이름, ifnull(avg(sc_score), 0) 평균
+from score
+right join student on sc_st_key = st_key
+group by st_key;
+
+# 1학년 1반 반 등수를 조회는 쿼리(평균). 
+# 평균이 같으면 국어, 영어, 수학 점수 순으로 비교하여 등수를 결정. 다 같으면 같은 등수 
+# 같은 등수는 나오는 경우, 다음 등수는 같은 등수 수만큼 건너 뜀 
+select rank() over(order by 평균 desc, 국어평균 desc, 영어평균 desc, 수학평균 desc ) 순위, t.*
+from 
+	(select 
+		st_grade 학년, 
+        st_class 반, 
+        st_num 번호, 
+        st_name 이름, 
+        ifnull(avg(sc_score), 0) 평균,
+        avg(case when sj_name = '국어' then sc_score end) 국어평균, 
+        avg(case when sj_name = '수학' then sc_score end) 수학평균, 
+        avg(case when sj_name = '영어' then sc_score end) 영어평균
+	from 
+		score
+	join 
+		subject on sc_sj_num = sj_num
+	right join 
+		student on sc_st_key = st_key
+	where 
+		st_grade = 1 and st_class = 1
+	group by st_key) as t;
+
+# 2학년 등수를 조회는 쿼리(평균). 
+select rank() over(order by 평균 desc) 순위, t.*
+from 
+	(select st_grade 학년, st_class 반, st_num 번호, st_name 이름, ifnull(avg(sc_score), 0) 평균
+		from score
+		right join student on sc_st_key = st_key
+        where st_grade = 2
+		group by st_key) as t;
+
+# 2학년들의 1학년 성적 평균을 이용하여 반 등수를 조회하는 쿼리 
+select 
+	rank() over(order by 반평균 desc) 반등수, t.*
+from
+	(
+	select 
+		학년, 반, avg(학생평균) 반평균
+	from 
+		(select 
+			st_grade 학년,
+			st_class 반,
+			st_key, 
+			ifnull(avg(sc_score), 0) 학생평균
+		from 
+			score 
+		right join 
+			student on st_key = sc_st_key
+		group by 
+			st_key
+		) as t
+	where 
+		학년 = 2
+	group by
+		학년, 반) as t;
+
+select 
+	rank() over(order by 반평균 desc) 반등수, t.*
+from
+	(
+	select 
+		st_grade 학년, st_class 반, ifnull(avg(sc_score), 0) 반평균
+	from 
+		score 
+	right join
+		student on sc_st_key = st_key
+	where 
+		st_grade = 3
+	group by
+		st_grade, st_class) as t;
