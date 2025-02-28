@@ -126,3 +126,15 @@ create table student.score(
     foreign key(sc_st_key) references student.student(st_key),
     foreign key(sc_sj_num) references student.subject(sj_num)
 );
+
+drop table if exists student.average;
+
+create table student.average(
+	av_num int primary key auto_increment, 
+    av_st_key int not null,
+    av_grade int not null,
+    av_semester int not null,
+    av_sum int not null,
+    av_count int not null,
+    foreign key(av_st_key) references student.student(st_key)
+);

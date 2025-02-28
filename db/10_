@@ -118,7 +118,6 @@ until 초기식
 end repeat;
 7. 반복문 - cursor
 	- 검색 결과를 반복문으로 활용할 때
-declare 변수명a boolean default false;
 declare 커서명 cursor for select 속성1,... from 테이블명;
 declare coutinue handler for not found set 변수명a = true;
 open 커서명;
@@ -142,23 +141,21 @@ begin
 	declare _count int;
     declare _done boolean default false;
     declare _st_key int;
-    declare _grade int default 1;
+	declare _grade int default 1;
     declare _semester int default 1;
     
     declare _cursor cursor for select st_key from student;
-    declare continue handler for not found set _done = true;
-    
-    
-    
+	declare continue handler for not found set _done = true;
+
+
+
     set _count = (select count(*) from average);
 	
     if _count = 0 then
 		open _cursor;
-		cursor_loop : loop 
-			
+        cursor_loop : loop
 			fetch _cursor into _st_key;
-			set _grade = 1;
-            if _done then
+			if _done then
 				leave cursor_loop;
 			end if;
             
@@ -166,72 +163,15 @@ begin
 				repeat
 					insert average(av_st_key, av_grade, av_semester, av_sum, av_count)
                     values(_st_key, _grade, _semester, 0, 0);
-                    set _semester = _semester + 1;
+                    
                 until _semester > 2
                 end repeat;
                 set _semester = 1;
-                set _grade = _grade + 1;
+                set _grade = _grade +1;
             end while;
-        end loop;
+		end loop;
         close _cursor;
     end if;
-    
 end //
 delimiter ;
 call init_average();
-
-# average 테이블에 sum과 count를 모두 0으로 초기화 
-drop procedure if exists zero_sum_count;
-
-delimiter //
-create procedure zero_sum_count()
-begin
-	update average set av_sum = 0, av_count = 0;
-end //
-delimiter ;
-call zero_sum_count();
-
-# score 테이블에 있는 학생 성적들을 이용하여 average 테이블에 sum과 count를 계산하는 프로시저 
-drop procedure if exists calc_average;
-
-delimiter //
-create procedure calc_average()
-begin
-
-    declare _done boolean default false;
-    declare _sc_st_key int;
-    declare _sc_score int;
-    declare _sc_grade int;
-    declare _sc_semester int;
-    
-    declare _cursor cursor for 
-		select sc_st_key, sc_score, sj_semester as sc_semester, sj_grade as sc_grade 
-        from score 
-        join subject on sc_sj_num = sj_num;
-    declare continue handler for not found set _done = true;
-    
-    call zero_sum_count();
-    
-	open _cursor;
-	cursor_loop : loop 
-		
-		fetch _cursor into _sc_st_key, _sc_score, _sc_semester, _sc_grade;
-
-		if _done then
-			leave cursor_loop;
-		end if;
-        
-        update average 
-		set 
-			av_sum = av_sum + _sc_score, 
-            av_count = av_count + 1
-		where
-			av_grade = _sc_grade and av_semester = _sc_semester and av_st_key = _sc_st_key;
-		
-	end loop;
-	close _cursor;
-
-    
-end //
-delimiter ;
-call calc_average();
