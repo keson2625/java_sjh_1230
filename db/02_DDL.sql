@@ -1,140 +1,166 @@
-# create   : 생성
-# alter    : 수정
-# drop     : 삭제
-# truncate : 테이블을 초기화
+# CREATE   : 생성
+# ALTER    : 수정
+# DROP     : 삭제
+# TRUNCATE : 테이블을 초기화
 # []는 생략 가능
 
 # 데이터베이스 생성
-# create database [if not exists] db명 
-# create schema [if not exists] db명 
-# if not exists가 없으면 있는 db를 생성하려는 경우 쿼리에 에러가 발생
+# CREATE DATABASE [IF NOT EXISTS] DB명 
+# CREATE SCHEMA [IF NOT EXISTS] DB명 
+# IF NOT EXISTS가 없으면 있는 DB를 생성하려는 경우 쿼리에 에러가 발생
 # => 이후 쿼리를 실행할 수 없음
-drop database if exists student;
-create database if not exists student;
+DROP DATABASE IF EXISTS STUDENT;
+CREATE DATABASE IF NOT EXISTS STUDENT;
 
 # 데이터베이스 삭제
-# drop database [if exists] db명
-# drop schema [if exists] db명
-# drop database if exists student;
+# DROP DATABASE [IF EXISTS] DB명
+# DROP SCHEMA [IF EXISTS] DB명
+# DROP DATABASE IF EXISTS STUDENT;
 
 # 데이터베이스 문자 집합을 설정
-# alter schema db명 default character set 새characterset default collate 새collate;
+# ALTER SCHEMA DB명 DEFAULT CHARACTER SET 새CHARACTERSET DEFAULT COLLATE 새COLLATE;
 
 # 테이블 생성 
 /*
-create table [if not exists] 테이블명(
-	컬럼명 타입 [zerofill] [unique] [not null] [default 값] [primary key] [auto_increment],
+CREATE TABLE [IF NOT EXISTS] 테이블명(
+	컬럼명 타입 [ZEROFILL] [UNIQUE] [NOT NULL] [DEFAULT 값] [PRIMARY KEY] [AUTO_INCREMENT],
     ...,
-	[ constraint 제약조건명 primary key(컬럼명),]
-    [ primary key(컬럼명),]
-    [ constraint 제약조건명 foreign key(컬럼명) references 참조테이블명(기본키명),]
-    [ foreign key(컬럼명) references 참조테이블명(기본키명),]
-    [ constraint 제약조건명 check(논리식),]
-    [ check(논리식)]
+	[ CONSTRAINT 제약조건명 PRIMARY KEY(컬럼명),]
+    [ PRIMARY KEY(컬럼명),]
+    [ CONSTRAINT 제약조건명 FOREIGN KEY(컬럼명) REFERENCES 참조테이블명(기본키명),]
+    [ FOREIGN KEY(컬럼명) REFERENCES 참조테이블명(기본키명),]
+    [ CONSTRAINT 제약조건명 CHECK(논리식),]
+    [ CHECK(논리식)]
 );
 
-zerofill
+ZEROFILL
   - 앞에 0으로 채울 때 사용
   - 5자리 숫자로 정하고, 1을 저장했을 때 앞에 4자리를 0으로 채움
-unique
+UNIQUE
   - 컬럼들의 값들이 중복되면 안되는 경우 지정.(보통 대체키에) 
-not null
-  - 컬럼이 null값을 가지면 안될 때 사용 
-primary key
+NOT NULL
+  - 컬럼이 NULL값을 가지면 안될 때 사용 
+PRIMARY KEY
   - 기본키 
   - 제약 조건으로 설정할 수도 있지만 컬럼명 옆에 지정할 수 있다 
-  - not null + unique 
-auto_increment
+  - NOT NULL + UNIQUE 
+AUTO_INCREMENT
   - 기본키에만 가능, 정수형 속성에 지정 가능 
   - 데이터를 추가할 때 기본키에 값을 지정하지 않으면 자동으로 1 증가되어서 추가 됨 
 */
-use student;
-drop table if exists student.student;
-create table if not exists student.student(
-	st_key int primary key auto_increment, 
-    st_grade int not null default 1,
-    st_class int not null default 1,
-    st_num int not null default 1,
-    st_name varchar(20) not null,
-    check(st_grade >= 1), 
-    check(st_class >= 1),
-    check(st_num >= 1)
+USE STUDENT;
+DROP TABLE IF EXISTS STUDENT.STUDENT;
+CREATE TABLE IF NOT EXISTS STUDENT.STUDENT(
+	ST_KEY INT PRIMARY KEY AUTO_INCREMENT, 
+    ST_GRADE INT NOT NULL DEFAULT 1,
+    ST_CLASS INT NOT NULL DEFAULT 1,
+    ST_NUM INT NOT NULL DEFAULT 1,
+    ST_NAME VARCHAR(20) NOT NULL,
+    CHECK(ST_GRADE >= 1), 
+    CHECK(ST_CLASS >= 1),
+    CHECK(ST_NUM >= 1)
 );
 
 # 테이블 삭제 
-# drop table [if exists] 테이블명;
-# drop table student;
+# DROP TABLE [IF EXISTS] 테이블명;
+# DROP TABLE STUDENT;
 
 # 테이블 수정 - 컬럼 추가
-# alter table 테이블명 add 컬럼명 타입 [...];
-alter table student add st_test datetime default current_timestamp;
+# ALTER TABLE 테이블명 ADD 컬럼명 타입 [...];
+ALTER TABLE STUDENT ADD ST_TEST DATETIME DEFAULT CURRENT_TIMESTAMP;
 
 # 테이블 수정 - 컬럼 수정 
-# alter table 테이블명 change 기존컬럼명 새컬럼명 타입 [...];
-alter table student change st_test test char(3) not null;
+# ALTER TABLE 테이블명 CHANGE 기존컬럼명 새컬럼명 타입 [...];
+ALTER TABLE STUDENT CHANGE ST_TEST TEST CHAR(3) NOT NULL;
 
 # 테이블 수정 - 컬럼 삭제 
-# alter table 테이블명 drop 컬럼명;
-alter table student drop test;
+# ALTER TABLE 테이블명 DROP 컬럼명;
+ALTER TABLE STUDENT DROP TEST;
 
-# 등록된 모든 check 제약 조건 확인
-select * from information_schema.check_constraints;
+# 등록된 모든 CHECK 제약 조건 확인
+SELECT * FROM INFORMATION_SCHEMA.CHECK_CONSTRAINTS;
 
 # 테이블 수정 - 제약 조건 추가 
-# alter table 테이블명 add constraint 제약조건명 제약조건 
-alter table student add constraint student_chk4 check(st_name != '');
+# ALTER TABLE 테이블명 ADD CONSTRAINT 제약조건명 제약조건 
+ALTER TABLE STUDENT ADD CONSTRAINT STUDENT_CHK4 CHECK(ST_NAME != '');
 
 # 테이블 수정 - 제약 조건 삭제
-# alter table 테이블명 drop constraint 제약조건명;
-alter table student drop constraint student_chk4;
+# ALTER TABLE 테이블명 DROP CONSTRAINT 제약조건명;
+ALTER TABLE STUDENT DROP CONSTRAINT STUDENT_CHK4;
 
-# 테이블 초기화 : auto_increment 값을 1로 초기화 및 데이터 제거 
-# truncate table 테이블명;
+# 테이블 초기화 : AUTO_INCREMENT 값을 1로 초기화 및 데이터 제거 
+# TRUNCATE TABLE 테이블명;
 /*
-insert into student.student(st_grade, st_class, st_num, st_name)
-values(1,1,1, "홍길동"), (1,1,2,"임꺽정"); 
+INSERT INTO STUDENT.STUDENT(ST_GRADE, ST_CLASS, ST_NUM, ST_NAME)
+VALUES(1,1,1, "홍길동"), (1,1,2,"임꺽정"); 
 
-select * from student.student;
+SELECT * FROM STUDENT.STUDENT;
 
-insert into student.student(st_grade, st_class, st_num, st_name)
-values(1,1,3, "홍길동"), (1,1,4,"임꺽정"); 
+INSERT INTO STUDENT.STUDENT(ST_GRADE, ST_CLASS, ST_NUM, ST_NAME)
+VALUES(1,1,3, "홍길동"), (1,1,4,"임꺽정"); 
 
-select * from student.student;
+SELECT * FROM STUDENT.STUDENT;
 
-truncate table student.student;
-# delete from student.student;
+TRUNCATE TABLE STUDENT.STUDENT;
+# DELETE FROM STUDENT.STUDENT;
 */
 
-drop table if exists studnet.subject;
+DROP TABLE IF EXISTS STUDNET.SUBJECT;
 
-create table student.subject(
-	sj_num int primary key auto_increment,
-    sj_grade int not null default 1,
-    sj_semester enum("1", "2") not null default "1",
-    sj_name varchar(10) not null,
-    check(sj_grade in (1,2,3))
+CREATE TABLE STUDENT.SUBJECT(
+	SJ_NUM INT PRIMARY KEY AUTO_INCREMENT,
+    SJ_GRADE INT NOT NULL DEFAULT 1,
+    SJ_SEMESTER ENUM("1", "2") NOT NULL DEFAULT "1",
+    SJ_NAME VARCHAR(10) NOT NULL,
+    CHECK(SJ_GRADE IN (1,2,3))
 );
 
-drop table if exists student.score;
+DROP TABLE IF EXISTS STUDENT.SCORE;
 
-create table student.score(
-	sc_num int primary key auto_increment,
-    sc_st_key int not null,
-    sc_sj_num int not null,
-    sc_score int not null default 0,
-    check(sc_score between 0 and 100),
-    foreign key(sc_st_key) references student.student(st_key),
-    foreign key(sc_sj_num) references student.subject(sj_num)
+CREATE TABLE STUDENT.SCORE(
+	SC_NUM INT PRIMARY KEY AUTO_INCREMENT,
+    SC_ST_KEY INT NOT NULL,
+    SC_SJ_NUM INT NOT NULL,
+    SC_SCORE INT NOT NULL DEFAULT 0,
+    CHECK(SC_SCORE BETWEEN 0 AND 100),
+    FOREIGN KEY(SC_ST_KEY) REFERENCES STUDENT.STUDENT(ST_KEY),
+    FOREIGN KEY(SC_SJ_NUM) REFERENCES STUDENT.SUBJECT(SJ_NUM)
 );
 
-drop table if exists student.average;
+DROP TABLE IF EXISTS STUDENT.AVERAGE;
 
-create table student.average(
-	av_num int primary key auto_increment, 
-    av_st_key int not null,
-    av_grade int not null,
-    av_semester int not null,
-    av_sum int not null,
-    av_count int not null,
-    foreign key(av_st_key) references student.student(st_key)
+CREATE TABLE STUDENT.AVERAGE(
+	AV_NUM INT PRIMARY KEY AUTO_INCREMENT, 
+    AV_ST_KEY INT NOT NULL,
+    AV_GRADE INT NOT NULL,
+    AV_SEMESTER INT NOT NULL,
+    AV_SUM INT NOT NULL,
+    AV_COUNT INT NOT NULL,
+    FOREIGN KEY(AV_ST_KEY) REFERENCES STUDENT.STUDENT(ST_KEY)
 );
+
+/* 
+외래키 UPDATE, DELETE 옵션 
+ - RESTRICT 
+   - 참조하고 있는 값이 있으면 삭제를 하지 않고 없으면 삭제 
+ - CASCADE
+   - 참조 테이블의 기본키가 삭제/수정되면 참조하는 테이블의 외래키가 있는 데이터가 수정/삭제 
+ - SET NULL
+   - 참조 테이블의 기본키가 삭제/수정되면 참조하는 테이블의 외래키를 NULL로 변경. 외래키가 NULL허용일 때 가능  
+ - NO ACTION
+   - 수정/삭제를 하지 않음. RESTRICT과 같음 
+*/
+# 학생 테이블의 데이터가 삭제되면 성적 테이블의 데이터도 삭제하기 위한 작업 
+ALTER TABLE `student`.`score` DROP FOREIGN KEY `score_ibfk_1`;
+ALTER TABLE `student`.`score` ADD CONSTRAINT `score_ibfk_1`
+  FOREIGN KEY (`SC_ST_KEY`) REFERENCES `student`.`student` (`ST_KEY`) ON DELETE CASCADE;
+
+# 과목 테이블의 데이터가 삭제되면 성적 테이블의 데이터도 삭제하기 위한 작업 
+ALTER TABLE `student`.`score` DROP FOREIGN KEY `score_ibfk_2`;
+ALTER TABLE `student`.`score` ADD CONSTRAINT `score_ibfk_2` 
+	FOREIGN KEY (`SC_SJ_NUM`) REFERENCES `student`.`subject` (`SJ_NUM`) ON DELETE CASCADE;
+
+# 학생 테이블의 데이터가 삭제되면 평균 테이블의 데이터도 삭제하기 위한 작업 
+ALTER TABLE `student`.`average` DROP FOREIGN KEY `average_ibfk_1`;
+ALTER TABLE `student`.`average` ADD CONSTRAINT `average_ibfk_1`  FOREIGN KEY (`AV_ST_KEY`)
+  REFERENCES `student`.`student` (`ST_KEY`)  ON DELETE CASCADE;

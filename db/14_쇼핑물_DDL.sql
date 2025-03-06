@@ -10,7 +10,7 @@ CREATE TABLE `buy` (
 	`bu_num`	int primary key auto_increment	NOT NULL,
 	`bu_date`	datetime default current_timestamp not	NULL,
 	`bu_state`	varchar(4) default"구매"not	NULL,
-	`bu_total-price`	int not	NULL,
+	`bu_total_price`	int not	NULL,
 	`bu_final_date`	datetime	NULL,
 	`me_id`	varchar(13)	NOT NULL
 );
@@ -41,7 +41,7 @@ CREATE TABLE `product` (
 	`pr_code`	char(6) primary key	NOT NULL,
 	`pr_name`	varchar(100) not	NULL,
 	`pr_content`	longtext not	NULL,
-	`pr)prlce`	int not	NULL,
+	`pr_prlce`	int not	NULL,
 	`pr_thumb`	varchar(200)	NULL,
 	`pr_del`	enum("y","n") default"n"not	NULL,
 	`pr_amount`	int default 0 not	NULL,
