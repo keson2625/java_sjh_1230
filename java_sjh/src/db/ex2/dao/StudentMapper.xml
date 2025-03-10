@@ -57,7 +57,7 @@
 			st_num = #{old.num}
 	</update>
 	<delete id="deleteStudent">
-		delete from student
+		delete from category
 		where st_grade = #{std.grade} and st_class = #{std.classNum} 
 			and st_num = #{std.num} 
 	</delete>

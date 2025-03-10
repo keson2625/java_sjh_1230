@@ -158,32 +158,21 @@ insert into ticket(ti_adult, ti_teen, ti_price, ti_me_num, ti_sd_num) values
 (1,1, 27000, 1, 3);
 # 예매 리스트 테이블에 추가하는 쿼리
 insert into ticket_list(tl_ti_num, tl_se_num) values (1, 1), (1, 2);
-# 스케줄에 예매 가능 좌석 수를 변경 
-update schedule set sd_pos_seat = sd_pos_seat - 2 
-where sd_num = 3;
 
 # abc123 회원이 1번 스케줄(미키 17, 4관 3월 11일 13:50)의 예약 가능한 좌석 a1, a2를 예매했을 때 필요한 쿼리
 insert into ticket(ti_adult, ti_teen, ti_price, ti_me_num, ti_sd_num) values
 (1, 1, 27000, 1, 1);
 insert into ticket_list(tl_ti_num, tl_se_num) values (2, 38), (2, 39);
-update schedule set sd_pos_seat = sd_pos_seat - 2 
-where sd_num = 1;
 
 # abc123 회원이 2번 스케줄(미키 17, 4관 3월 11일 19:20)의 예약 가능한 좌석 a1, a2를 예매했을 때 필요한 쿼리
 insert into ticket(ti_adult, ti_teen, ti_price, ti_me_num, ti_sd_num) values
 (1, 1, 27000, 1, 2);
 insert into ticket_list(tl_ti_num, tl_se_num) values (3, 38), (3, 39);
-update schedule set sd_pos_seat = sd_pos_seat - 2 
-where sd_num = 2;
 
 # abc123 회원이 2번 스케줄(미키 17, 4관 3월 11일 19:20)의 예약 가능한 좌석 a3, a4를 예매했을 때 필요한 쿼리
 insert into ticket(ti_adult, ti_teen, ti_price, ti_me_num, ti_sd_num) values
 (1, 1, 27000, 1, 2);
 insert into ticket_list(tl_ti_num, tl_se_num) values (4, 40), (4, 41);
-update schedule set sd_pos_seat = sd_pos_seat - 2 
-where sd_num = 2;
 
 # abc123회원이 2번 스케줄에 예약했던 좌선 a3, a4를 취소했을 때 필요한 쿼리 
 update ticket set ti_state = "취소" where ti_num =4;
-update schedule set sd_pos_seat = sd_pos_seat + 2 
-where sd_num = 2;

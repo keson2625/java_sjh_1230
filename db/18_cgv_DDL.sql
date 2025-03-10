@@ -77,14 +77,13 @@ create table `person` (
 	`pr_name`	varchar(50) not	null,
 	`pr_birth`	date	null,
 	`pr_detail`	longtext not	null,
-	`pr_ct_name`	varchar(50)	not null
+	`pr_ct_name`	varchar(50)
 );
 
 drop table if exists `movie_ratings`;
 
 create table `movie_ratings` (
-	`mr_age`	varchar(10) primary key	not null,
-	`fIELD`	varchar(255)	null
+	`mr_age`	varchar(10) primary key	not null
 );
 
 drop table if exists `schedule`;
@@ -131,7 +130,7 @@ create table `seat` (
 	`se_num`	int primary key auto_increment	not null,
 	`se_name`	varchar(3) not	null,
 	`se_pos`	enum("y","n") default "y" not	null,
-	`sc_sc_num`	int	not null
+	`se_sc_num`	int	not null
 );
 
 drop table if exists `member`;
@@ -150,8 +149,7 @@ create table `ticket` (
 	`ti_adult`	int not	null,
 	`ti_teen`	int not	null,
 	`ti_price`	int not	null,
-	`ti_state`	enum("결재","취소") default "결재" not	null,
-	`ti_mv_num`	int	not null,
+	`ti_state`	enum("결제","취소") default "결제" not	null,
 	`ti_me_num`	int	not null,
 	`ti_sd_num`	int	not null
 );
@@ -272,17 +270,10 @@ references `region` (
 );
 
 alter table `seat` add constraint `fk_screen_to_seat_1` foreign key (
-	`sc_sc_num`
+	`se_sc_num`
 )
 references `screen` (
 	`sc_num`
-);
-
-alter table `ticket` add constraint `fk_movie_to_ticket_1` foreign key (
-	`ti_mv_num`
-)
-references `movie` (
-	`mv_num`
 );
 
 alter table `ticket` add constraint `fk_member_to_ticket_1` foreign key (
