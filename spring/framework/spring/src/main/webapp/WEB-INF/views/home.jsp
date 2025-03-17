@@ -35,6 +35,12 @@
 	<br>
 	<button type="submit">전송</button> 
 </form>
+<h1>url 경로에 데이터 보내기</h1>
+<a href="/spring/홍길동/10">url 경로에 데이터 보내기</a>
+<h1>redirect 예제</h1>
+<a href="/spring/redirect?name=홍길동&age=10">리다이엑트 예제</a>
+<h1>forward 예제</h1>
+<a href="/spring/forward?name=홍길동&age=10">포워드 예제</a>
 <script type="text/javascript">
 	let name1 = "${name}";
 	console.log(name1);
