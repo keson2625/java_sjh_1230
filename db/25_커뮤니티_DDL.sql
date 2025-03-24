@@ -30,7 +30,7 @@ create table `post` (
 	`po_view`	int default 0 not	null,
 	`po_up`	int default 0 not	null,
 	`po_down`	int default 0 not	null,
-	`po_state`	char(1) default 'n' not	null,
+	`po_del`	char(1) default 'n' not	null,
 	`po_me_id`	varchar(15)	null,
 	`po_bo_num`	int	not null
 );

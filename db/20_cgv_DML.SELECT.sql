@@ -42,7 +42,7 @@ where se_sc_num = 4 and se_num not in(
 	left join ticket on ti_sd_num = sd_num
 	left join ticket_list on ti_num = tl_ti_num
 	where se_pos = "y" and sd_num = 2 and tl_se_num = se_num and ti_state = "결제");
-    
+ 
  # 장르별 등록된 영화수를 조회하는 쿼리    
  select gr_name, count(mg_gr_name) 영화수 from genre 
  left join movie_genre on gr_name = mg_gr_name

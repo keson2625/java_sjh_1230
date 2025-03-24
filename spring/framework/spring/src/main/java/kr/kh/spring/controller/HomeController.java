@@ -65,7 +65,6 @@ public class HomeController {
 	public String home() {
 		return "home";
 	}
-		
 	
 	/* 메소드의 매개변수에 객체를 넣어주면, 맵핑이 되든 안되든 기본 생성자를 이용하여 객체를 만듬
 	 * => 화면에서 보낸 변수의 이름과 같은 필드가 있으면 자동으로 맵핑이 되어 값이 변경됨. 
@@ -96,7 +95,7 @@ public class HomeController {
 		return "sample/send";
 	}
 	*/
-	@GetMapping("/{name}/{age}")
+	@GetMapping("/sample/{name}/{age}")
 	public String nameAge(@PathVariable("name")String name1, @PathVariable("age")int age1) {
 		System.out.println("화면에서 전송한 이름 : " + name1);
 		System.out.println("화면에서 전송한 이름 : " + age1);
@@ -162,9 +161,10 @@ public class HomeController {
 	}
 	@GetMapping("/logout")
 	public String logout(HttpServletRequest request) {
+		
+		//세션에 있는 user를 삭제
 		HttpSession session = request.getSession();
 		session.removeAttribute("user");
-		//세션에 있는 user를 삭제
 		return "redirect:/";
 	}
 }
