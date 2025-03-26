@@ -24,7 +24,8 @@
 	        </li>
 	        <li class="nav-item">
 	          <a class="nav-link" href="<c:url value="/login"/>">로그인</a>
-	        </li>  
+	        </li>
+	       
         </c:if>
         <c:if test="${user != null }">
         	<li class="nav-item">

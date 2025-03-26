@@ -1,0 +1,3 @@
+kakao:
+  client_id: 87b897e5a743948dcb613823dfc502cd
+  redirect_uri: http://localhost:8080/login

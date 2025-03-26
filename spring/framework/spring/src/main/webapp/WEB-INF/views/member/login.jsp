@@ -1,23 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+	<title>로그인</title>
+	<link href="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote-bs4.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote-bs4.min.js"></script>
 </head>
 <body>
-	<form action="<c:url value="/login"/>" method="post">
-		<h1>로그인</h1>
-		<div class="form-group mt-3">
-			<label for="id" class="form-label">아이디</label>
-			<input type="text" class="form-control" id="id" name="me_id">
-		</div>
-		<div class="form-group mt-3">
-			<label for="pw" class="form-label">비번</label>
-			<input type="password" class="form-control" id="pw" name="me_pw">
-		</div>
-		<button type="submit" class="btn btn-outline-success mt-3 col-12">로그인</button>
-	</form>
+    <!-- 카카오 로그인 버튼 (a 태그만 사용) -->
+    <a class="p-2" href="https://kauth.kakao.com/oauth/authorize?client_id=키&redirect_uri=http://localhost:8080/login&response_type=code">
+        <img src="<c:url value='/static/kakao_login_medium_narrow.png' />" alt="카카오 로그인" style="height:60px">
+        <!-- 또는 텍스트: "카카오로 로그인" -->
+    </a>
 </body>
 </html>
+ㄴ
