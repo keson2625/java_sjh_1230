@@ -9,16 +9,16 @@ import kr.kh.spring.dao.CommentDAO;
 import kr.kh.spring.model.vo.CommentVO;
 import kr.kh.spring.model.vo.MemberVO;
 import kr.kh.spring.pagination.Criteria;
-
+import kr.kh.spring.pagination.PageMaker;
 
 @Service
-public class CommentServiceImp implements CommentService{
+public class CommentServiceImp implements CommentService {
 
 	@Autowired
 	CommentDAO commentDao;
-	
+
 	@Override
-	public boolean insertComment(CommentVO comment, MemberVO user){
+	public boolean insertComment(CommentVO comment, MemberVO user) {
 		if(comment == null) {
 			return false;
 		}
@@ -41,5 +41,41 @@ public class CommentServiceImp implements CommentService{
 		}
 		return commentDao.selectCommentList(cri);
 	}
-}
 
+	@Override
+	public PageMaker getPageMaker(Criteria cri) {
+		if(cri == null) {
+			return null;
+		}
+		int totalCount = commentDao.selectCountCommentList(cri);
+		return new PageMaker(3, cri, totalCount);
+	}
+
+	@Override
+	public boolean deleteComment(int co_num, MemberVO user) {
+		if(user == null) {
+			return false;
+		}
+		//작성자 확인
+		CommentVO comment = commentDao.selectComment(co_num);
+		
+		if(comment == null || !comment.getCo_me_id().equals(user.getMe_id())) {
+			return false;
+		}
+		return commentDao.deleteComment(co_num);
+	}
+
+	@Override
+	public boolean updateComment(CommentVO comment, MemberVO user) {
+		if(comment == null || user == null) {
+			return false;
+		}
+		
+		CommentVO dbComment = commentDao.selectComment(comment.getCo_num());
+
+		if(dbComment == null || !dbComment.getCo_me_id().equals(user.getMe_id())) {
+			return false;
+		}
+		return commentDao.updateComment(comment);
+	}
+}
