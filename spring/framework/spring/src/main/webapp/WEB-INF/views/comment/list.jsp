@@ -13,7 +13,7 @@
 			<div class="<c:if test="${comment.co_num != comment.co_ori_num }">pl-5</c:if>">
 				<div class="comment-item form-control mb-3" style="min-height: auto; height: auto;">
 					<c:choose>
-						<c:when test="${comment.co_del eq 'n' }">
+						<c:when test="${comment.co_del eq 'N' }">
 							<div class="comment-wrap">
 								<div class="comment-writer">${comment.co_me_id}</div>
 								<div class="comment-content">${comment.co_content }</div>

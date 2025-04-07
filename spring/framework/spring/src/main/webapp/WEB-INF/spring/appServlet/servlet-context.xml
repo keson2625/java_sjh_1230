@@ -7,6 +7,7 @@
 		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
 
+	<context:property-placeholder location="/WEB-INF/spring/config.properties" />
 	<annotation-driven />
 
 	<resources mapping="/resources/**" location="/resources/" />
@@ -47,9 +48,14 @@
 	<beans:bean id="adminInterceptor" class="kr.kh.spring.interceptor.AdminInterceptor"/>
 	<beans:bean id="guestInterceptor" class="kr.kh.spring.interceptor.GuestInterceptor"/>
 	<beans:bean id="memberInterceptor" class="kr.kh.spring.interceptor.MemberInterceptor"/>
-
+	<beans:bean id="autoLoginInterceptor" class="kr.kh.spring.interceptor.AutoLoginInterceptor"/>
+	
 	<!-- 인터셉터 맵핑 -->
 	<interceptors>
+		<interceptor>
+			<mapping path="/**"/>
+			<beans:ref bean="autoLoginInterceptor"/>
+		</interceptor>
 		<interceptor>
 			<mapping path="/post/insert"/>
 			<mapping path="/post/delete/*"/>
@@ -80,6 +86,6 @@
 	</beans:bean>
 	<!-- 업로드할 파일 경로 -->
 	<beans:bean id="uploadPath" class="java.lang.String">
-		<beans:constructor-arg value="d:\\uploads"/>
+		<beans:constructor-arg value="${file.location}"/>
 	</beans:bean>
 </beans:beans>

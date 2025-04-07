@@ -10,7 +10,9 @@ create table `member` (
 	`me_id`	varchar(15) primary key	not null,
 	`me_pw`	varchar(255) not	null,
 	`me_email`	varchar(255) not	null,
-	`me_authority`	varchar(5) default "user" not	null
+	`me_authority`	varchar(5) default "user" not	null,
+    `me_cookie`	varchar(255) ,
+    `me_limit` datetime
 );
 
 drop table if exists `board`;
@@ -60,7 +62,7 @@ create table `comment` (
 	`co_content`	varchar(200)	not null,
 	`co_date`	datetime default current_timestamp not	null,
 	`co_ori_num`	int not	null,
-	`co_del`	char(1)default 'n' not	null,
+	`co_del`	char(1)default 'N' not	null,
 	`co_me_id`	varchar(15)	not null,
 	`co_po_num`	int	not null
 );
