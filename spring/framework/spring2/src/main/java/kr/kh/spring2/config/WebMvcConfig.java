@@ -1,5 +1,6 @@
 package kr.kh.spring2.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -13,6 +14,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.tiles3.TilesConfigurer;
 import org.springframework.web.servlet.view.tiles3.TilesViewResolver;
 
+import kr.kh.spring2.interceptor.AutoLoginInterceptor;
 import kr.kh.spring2.interceptor.LoginInterceptor;
 
 @Configuration
@@ -20,6 +22,11 @@ import kr.kh.spring2.interceptor.LoginInterceptor;
 @ComponentScan(basePackages = "kr.kh.spring2") 
 public class WebMvcConfig implements WebMvcConfigurer {
 
+	@Autowired
+	LoginInterceptor loginInterceptor;
+	@Autowired
+	AutoLoginInterceptor autoLoginInterceptor;
+	
     @Bean
     public InternalResourceViewResolver viewResolver() {
         InternalResourceViewResolver resolver = new InternalResourceViewResolver();
@@ -49,11 +56,11 @@ public class WebMvcConfig implements WebMvcConfigurer {
     }
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        // 인터셉터 추가 및 URL 패턴 설정
-        registry.addInterceptor(new LoginInterceptor())
-                .addPathPatterns("/**")  // 모든 경로에 대해 인터셉터 적용
-                .excludePathPatterns("/post/list", "/post/detail"); //제외할 경로  // 특정 경로 제외
-        
+        registry.addInterceptor(loginInterceptor)
+                .addPathPatterns("/login"); 
+        //AutoLoginInterceptor를 연결
+        registry.addInterceptor(autoLoginInterceptor)
+        		.addPathPatterns("/**"); 
     }
 	@Bean
 	public PasswordEncoder passwordEncoder() {

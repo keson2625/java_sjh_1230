@@ -1,4 +1,3 @@
-
 package kr.kh.spring2.config;
 
 import javax.sql.DataSource;
@@ -17,7 +16,7 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 @MapperScan(basePackages = "kr.kh.spring2.dao") // 다오 인터페이스 패키지 경로 설정
 @PropertySource("classpath:config.properties")
 public class MyBatisConfig {
-	
+
 	@Value("${db.username}")
 	private String username;
 	
