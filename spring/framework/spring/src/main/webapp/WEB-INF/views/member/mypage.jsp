@@ -13,32 +13,27 @@
 	</style>
 </head>
 <body>
-	<form action="<c:url value="/signup"/>" method="post">
-		<h1>회원 정보변경</h1>
+	<form action="<c:url value="/mypage"/>" method="post">
+		<h1>회원 정보 변경</h1>
 		<div class="form-group mt-3">
-			<label for="pw" class="form-label">새비번</label>
+			<label for="pw" class="form-label">새 비번</label>
 			<input type="password" class="form-control" id="pw" name="me_pw">
 		</div>
 		<div class="form-group mt-3">
-			<label for="pw2" class="form-label">새비번 확인</label>
+			<label for="pw2" class="form-label">새 비번 확인</label>
 			<input type="password" class="form-control" id="pw2" name="me_pw2">
 		</div>
 		<div class="form-group mt-3">
 			<label for="email" class="form-label">이메일</label>
-			<input type="email" class="form-control" id="email" name="me_email" value="${user.me_email}">
+			<input type="email" class="form-control" id="email" name="me_email" value="${user.me_email }">
 		</div>
-		<button type="submit" class="btn btn-outline-success mt-3 col-12">회원가입</button>
+		<button type="submit" class="btn btn-outline-success mt-3 col-12">회원 정보 변경</button>
 	</form>
 	<script type="text/javascript">
-	
+		
 		$("form").validate({
 			rules : {
-				me_id : {
-					required : true,
-					regex : /^[a-zA-Z0-9]{3,13}$/
-				},
 				me_pw : {
-					required : true,
 					regex : /^[a-zA-Z0-9!@#$]{3,15}$/
 				},
 				me_pw2 : {
@@ -50,12 +45,7 @@
 				}
 			},
 			messages : {
-				me_id : {
-					required : "필수 항목입니다.",
-					regex : "아이디는 영문, 숫자만 가능하며, 3~13자입니다."
-				},
 				me_pw : {
-					required : "필수 항목입니다.",
 					regex : "비번은 영문, 숫자,특수문자(!@#$)만 가능하며, 3~15자입니다."
 				},
 				me_pw2 : {
