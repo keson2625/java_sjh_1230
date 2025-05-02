@@ -10,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 import kr.kh.shoppingmall.dao.ProductDAO;
 import kr.kh.shoppingmall.model.vo.BuyListVO;
 import kr.kh.shoppingmall.model.vo.BuyVO;
+import kr.kh.shoppingmall.model.vo.CartVO;
 import kr.kh.shoppingmall.model.vo.CategoryVO;
 import kr.kh.shoppingmall.model.vo.ProductVO;
 import kr.kh.shoppingmall.utils.CustomUser;
@@ -176,8 +177,12 @@ public class ProductService {
 		setBu_num(buy.getBu_num(), buy.getList());
 		productDAO.insertBuyList(buy.getList());
 		for(BuyListVO bl : buy.getList()){
+			//수량 업데이트
 			productDAO.updateProductAmount(bl);
+			//장바구니에 있는 제품들은 제거 
+			productDAO.deleteCart(bl.getBl_pr_code(), buy.getBu_me_id());
 		}
+
 		return true;
 	}
 
@@ -207,5 +212,61 @@ public class ProductService {
 			total += bl.getBl_price();
 		}
 		return total;
+	}
+
+	public List<BuyVO> getBuyList(CustomUser customUser) {
+		if(customUser == null){
+			return null;
+		}
+		String id = customUser.getUsername();
+		return productDAO.selectBuyList(id);
+	}
+
+	public boolean updateBuy(int num, CustomUser customUser) {
+		if(customUser == null){
+			return false;
+		}
+		return productDAO.updateBuy(num, customUser.getUsername());
+	}
+
+	public boolean insertCart(CartVO cart, CustomUser customUser) {
+		if(customUser == null || cart == null){
+			return false;
+		}
+		cart.setCt_me_id(customUser.getUsername());
+
+		CartVO dbCart = productDAO.selectCart(cart);
+		if(dbCart == null){
+			return productDAO.insertCart(cart);
+		}
+		dbCart.setCt_amount(cart.getCt_amount());
+		return productDAO.updateCart(dbCart);
+	}
+
+	public List<CartVO> getCartList(CustomUser customUser) {
+		if(customUser == null){
+			return null;
+		}
+		return productDAO.selectCartList(customUser.getUsername());
+	}
+
+	public String updateCart(CartVO cart, CustomUser customUser) {
+		if(cart == null || customUser == null){
+			return "장바구니 변경에 실패했습니다.";
+		}
+		String id = customUser.getUsername();
+		cart.setCt_me_id(id);
+		CartVO dbCart = productDAO.selectCart(cart);
+		//수량 체크를 위해
+		ProductVO product = productDAO.selectProduct(cart.getCt_pr_code());
+		//제고량이 적은 경우
+		if(product.getPr_amount() < cart.getCt_amount()){
+			return "" + product.getPr_amount();
+		}
+		dbCart.setCt_amount(cart.getCt_amount());
+		if(productDAO.updateCart(dbCart)){
+			return ""+dbCart.getCt_amount();
+		}
+		return "제고량 수정에 실패했습니다.";
 	}
 }
